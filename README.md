@@ -6,7 +6,7 @@ Desde el IES Al-Ándalus nos acaban de comentar que por favor eliminemos la rest
 
 El diagrama de clases queda como te muestro a continuación y poco a poco te iré explicando los diferentes pasos a realizar:
 
-![Diagrama de clases para reservasaulas](https://github.com/andresrubiodelrio/ReservasAulas-v1/blob/main/src/main/resources/reservasAulas.png)
+![Diagrama de clases para reservasaulas](https://github.com/andresrubiodelrio/ReservasAulas-v1/blob/main/src/main/resources/reservasaulas.png)
 
 He subido a GitHub un esqueleto de proyecto gradle que ya lleva incluidos todos los test necesarios que el programa debe pasar. Dichos test están todos comentados y deberás ir descomentándolos conforme vayas avanzando con la tarea. La URL del repositorio es en la que te encuentras.
 
