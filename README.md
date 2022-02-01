@@ -19,6 +19,7 @@ Por tanto, tu tarea va a consistir en completar los siguientes apartados:
 5. Modifica la clase `Profesores` para que utilice un `ArrayList` en vez de un `Array`. Modifica también los métodos, eliminando los necesarios, para que sigan haciendo lo mismo pero utilizando esta estructura. Ten en cuenta que el método `representar` ahora también devuelve una lista. Haz un commit.
 6. Modifica la clase `Reservas` para que utilice un `ArrayList` en vez de un `Array`. Modifica también los métodos, eliminando los necesarios, para que sigan haciendo lo mismo pero utilizando esta estructura. Ten en cuenta que el método `representar` ahora también devuelve una lista. Haz un commit.
 7. Haz los ajustes necesarios en la clase `Vista` y `Consola` para que todo siga funcionando igual. Haz un commit.
+8. **IMPORTANTE: Se deben utilizar iteradores para recorrer los elementos de las listas.**
 
 
 ###### Se valorará:
