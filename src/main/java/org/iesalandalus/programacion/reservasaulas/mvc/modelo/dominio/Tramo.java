@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.reservasaulas.MVC.modelo.dominio;
+package org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio;
 
 public enum Tramo {
 	MANANA("Mañana"), TARDE("Tarde");

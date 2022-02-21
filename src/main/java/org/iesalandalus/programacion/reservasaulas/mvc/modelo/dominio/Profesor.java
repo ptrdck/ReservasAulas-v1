@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.reservasaulas.MVC.modelo.dominio;
+package org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio;
 
 import java.util.Objects;
 
@@ -36,27 +36,46 @@ public class Profesor {
 	//validación nombre
 	private void setNombre(String nombre) {
 		if (nombre== null) {
-			throw new NullPointerException("ERROR: El nombre de un profesor no puede ser nulo");
+			throw new NullPointerException("ERROR: El nombre del profesor no puede ser nulo.");
 		}
-		if (nombre.trim().equals("")) {
-			throw new IllegalArgumentException("ERROR: El nombre de un profesor no puede ser vacío");
+		if (nombre.isEmpty()) {
+			throw new IllegalArgumentException("ERROR: El nombre del profesor no puede estar vacío.");
 		}
-		this.nombre = nombre;
+		this.nombre = formateaNombre(nombre);
+	}
+	private String formateaNombre(String nombre) {
+		// damos el formato inicial llevando todos los caracteres a minúsculas y reemplazando todos los espacios en blanco para que el nombre de salid esté todo junto
+		nombre = nombre.replace("\\s+", "").trim().toLowerCase();
+		String nombreLargo = "";
+		//iniciamos la variable de salida que se llamará nombreLargo
+		nombreLargo += nombre.substring(0, 1).toUpperCase();
+		
+		// ciclo for que recorre la cadena String
+		for (int i=0;i< nombre.length();i++ ) {
+			//condicion para que transforme a mayúscula el caracter siguiente en caso de que encuentre un espacio vacío
+			if (nombre.charAt(i-1) == ' '){
+				nombreLargo += nombre.substring(i, i+1).toUpperCase();
+			} else {
+				nombreLargo += nombre.substring(i, i+1);
+			}
+		}
+		nombre= nombreLargo.trim();
+		return nombreLargo;
 	}
 	//validación correo
 	public void setCorreo(String correo) {
 		if (correo== null) {
-			throw new NullPointerException("ERROR: El correo de un profesor no puede ser nulo");
+			throw new NullPointerException("ERROR: El correo del profesor no puede ser nulo.");
 		}
 		if (!correo.matches(ER_CORREO)) {
-			throw new IllegalArgumentException("ERROR: El correo indicado no es válido");
+			throw new IllegalArgumentException("ERROR: El correo del profesor no es válido.");
 		}
 		this.correo = correo;
 	}
 	//validación teléfono
 	public void setTelefono(String telefono) {
 		if (telefono== null || !telefono.matches(ER_TELEFONO)) {
-			throw new IllegalArgumentException("ERROR:El teléfono indicado no es válido.");
+			throw new IllegalArgumentException("ERROR: El teléfono del profesor no es válido.");
 		}
 		this.telefono = telefono;
 	}
@@ -66,13 +85,9 @@ public class Profesor {
 		return nombre;
 	}
 
-
-
 	public String getCorreo() {
 		return correo;
 	}
-
-	
 
 	public String getTelefono() {
 		return telefono;
@@ -80,7 +95,7 @@ public class Profesor {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(correo, nombre, telefono);
+		return Objects.hash(nombre);
 	}
 
 	@Override
@@ -97,7 +112,9 @@ public class Profesor {
 
 	@Override
 	public String toString() {
-		return "Profesor [nombre=" + getNombre() + ", correo=" + getCorreo() + ", telefono=" + getTelefono() + "]";
+		//condición de que pueda salir o no el teléfono. 
+		String cadenaTelefono=(getTelefono()== null)? "": ", telefono=" +getTelefono();
+		return "nombre=" + getNombre() + ", correo=" + getCorreo() + cadenaTelefono ;
 	}
 	
 }

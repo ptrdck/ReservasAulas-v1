@@ -1,142 +1,109 @@
-package org.iesalandalus.programacion.reservasaulas.MVC.modelo.negocio;
+package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
-import org.iesalandalus.programacion.reservasaulas.MVC.modelo.dominio.Aula;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
 
 public class Aulas {
 
-	//inicializacion de variables y array
-	private int capacidad;
-	private int tamano;
-	//(0...*)
-	private Aula[] coleccionAulas;
+	//Inicialización de arrayList (0...*)
+	private List<Aula> coleccionAulas;
 	
-	//Constructor con parametro
-	public Aulas(int capacidad) {
-		if (capacidad<= 0) {
-			throw new IllegalArgumentException("ERROR: La capacidad debe ser superior a 0");
-		}
-		this.capacidad= capacidad;
-		coleccionAulas= new Aula[capacidad];
+	public Aulas() {
+		coleccionAulas= new ArrayList<>();
 	}
-	public Aula[] get() {
-		return copiaProfundaAulas();
+	
+	//Constructor copia
+	public Aulas(Aulas aulas) {
+		if (aulas== null) {
+			throw new NullPointerException("ERROR: No se puede copiar aulas nulas.");
+		}
+		setAulas(aulas);
+	}
+	//creción de Setter para Aulas
+	private void setAulas(Aulas aulas) {
+		if (aulas== null) {
+			throw new NullPointerException("ERROR:No se puede copiar aulas nulas.");
+		}
+		//copia de array para evitar Aliasing
+		coleccionAulas= copiaProfundaAulas(aulas.coleccionAulas);
+	}
+	
+	//Crecion getter para lista Aulas, retorna una copia para coleccion
+	public List<Aula> getAulas() {
+		return copiaProfundaAulas(coleccionAulas);
 	}
 	
 	//Constructor copia en array
-	private Aula[] copiaProfundaAulas() {
-		Aula[] copiaAulas= new Aula[capacidad];
-		for (int i=0; !tamanoSuperado(i); i++) {
-			copiaAulas[i] = new Aula(coleccionAulas[i]);
+	private List<Aula> copiaProfundaAulas(List<Aula> aulas) {
+		List<Aula> copiaAulas= new ArrayList<>();
+		// Recorrer lista con Iterator. Inicializar Iterador antes del while
+		Iterator<Aula> iteradorAulas= aulas.iterator();
+		while(iteradorAulas.hasNext()) {
+			copiaAulas.add(new Aula (iteradorAulas.next()));	
 		}
 		return copiaAulas;
 	}
 	
-	public int getTamano() {
-		return tamano;
+	//Método que nos retorna el tamaño de la colección
+	public int getNumAulas() {
+		return coleccionAulas.size();
 	}
 	
-	public int getCapacidad() {
-		return capacidad;
-	}
-	
+	//método insertar aula. Comprobación de nulos. Recorre la colección cuando no es nulo en búsqueda de alguna coincidencia. 
+	//Retorna  una excepción si encuentra el aula ya creada. ASigna una copia de aula 
 	public void insertar (Aula aula) throws OperationNotSupportedException {
 		if (aula== null) {
-			throw new NullPointerException("ERROR: El aula no puede ser nula.");
+			throw new NullPointerException("ERROR: No se puede insertar un aula nula.");
 		}
 		
-		// Comparación entre tamaño y capacidad. condicion tamano <= capacidad
-		
-		if (capacidadSuperada(tamano)) {
-			throw new OperationNotSupportedException("ERROR: No quedan más aulas disponibles.");
-		}
-		int indice= buscarIndice(aula);
-		if (tamanoSuperado(indice)) {
-			coleccionAulas[tamano] = new Aula(aula);
-			// incremento en tamaño
-			tamano++;
+		else if (buscar(aula)== null) {
+			coleccionAulas.add(new Aula(aula)); //incremento
 		} else {
-			throw new OperationNotSupportedException("ERROR: Ese nombre ya existe para un aula.");
+			throw new OperationNotSupportedException("ERROR: Ya existe un aula con ese nombre.");
 		
 		}
 	}
-	//método que devuelve la posición de aula en el array
-	private int buscarIndice(Aula aula) {
-		int indice= 0;
-		boolean encontrado= false;
-		
-		// booleano recorre el array y finaliza sin necesidad de recorrer todo el tamaño
-		
-		while(!tamanoSuperado(indice) && !encontrado){
-			if (coleccionAulas[indice].equals(aula)) {
-				encontrado= true;
-			} else {
-				indice++;
-			}
-		}
-		return indice;
-		}
-	
-	//validador de metodo tamañoSuperado
-	private boolean tamanoSuperado(int indice) {
-		//Si indice >= tamano devuelve true
-		return indice>= tamano;
-	}
-	
-	//validador de metodo capacidadSuperada
-	private boolean capacidadSuperada(int indice) {
-		//Si indice>= capacidad devuelve true
-		return indice>= capacidad;
-	}
-	
-	//Constructor con parámetro
+	//método que busca el indice de un aula creada como parámetro en el método anterior. 
 	public Aula buscar(Aula aula) {
-		int indice= buscarIndice(aula);
-		
 		if (aula== null) {
-			throw new NullPointerException("ERROR: No existe un aula nula.");
+			throw new NullPointerException("ERROR: No se puede buscar un aula nula.");
 		}
-		if(!tamanoSuperado(indice)) {
-			return new Aula(coleccionAulas[indice]);
-		} else {
+		// Buscamos si el Aula existe dentro de coleccionAulas
+		if (coleccionAulas.contains(aula)) {
+			return new Aula(aula);
+		}else {
 			return null;
 		}
 	}
-	
 	//Metodo borrar:
 	//Localizar posición de aula en el array y desplazamos posición para borrar
 	
 	public void borrar(Aula aula) throws OperationNotSupportedException{
 		if (aula== null) {
-			throw new NullPointerException("ERROR: No se puede borrar un aula nula");
+			throw new NullPointerException("ERROR: No se puede borrar un aula nula.");
 		}
-		int indice= buscarIndice(aula);
-		if (!tamanoSuperado(indice)) {
-			desplazarUnaPosicionHaciaIzquierda(indice);
-		//reducir tamaño
-			tamano--;
-		} else {
-			throw new OperationNotSupportedException("ERROR: No hay coincidencias con el nombre ingresado.");
-		}
-		
-	}
-	//metodo desplazamiento de elementos en array
-	private void desplazarUnaPosicionHaciaIzquierda(int indice) {
-		for(int i= indice; i< coleccionAulas.length -1; i++) {
-			//Reordenamiento del array:
-			//Recorre todo el array desplazando hacia la izquierda
-			//Orden ascendente
-			coleccionAulas[i]= coleccionAulas[i+1];
-			
+		if (buscar(aula)== null) {
+			throw new OperationNotSupportedException("ERROR: No existe ningún aula con ese nombre.");
+		} // condición si encuentra el aula buscada. Posteriormente retorna la eliminación del aula
+		else if (coleccionAulas.contains(aula)) {
+			coleccionAulas.remove(aula);
 		}
 	}
 	
-	//metodo para Representar elementos del array
-	public String[] representar() {
-		String[] representacion= new String[tamano];
-		for (int i= 0; !tamanoSuperado(i); i++) {
-			representacion[i]= coleccionAulas[i].toString();	
+	//metodo para Representar. Crea ArrayList de tipo String donde se guardarán los datos
+	//que saldrán de .toString de Aulas
+	public List<String> representar() {
+		//incialización
+		List<String> representacion=new ArrayList<>();
+		// Iterador reemplazo del antiguo for
+		Iterator<Aula> iteradorAulas= coleccionAulas.iterator();
+		while (iteradorAulas.hasNext()) {
+			representacion.add(iteradorAulas.next().toString());
 		}
 		return representacion;
 	}
