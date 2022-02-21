@@ -1,5 +1,5 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio;
-/*
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
@@ -17,9 +17,9 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Permanencia;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Tramo;
 import org.junit.Test;
-*/
+
 public class ReservasTest {
-/*	
+
 	private static final String NOMBRE_PROFESOR1 = "José Ramón";
 	private static final String NOMBRE_PROFESOR2 = "Andrés";
 	private static final String CORREO = "a@b.cc";
@@ -309,11 +309,11 @@ public class ReservasTest {
 	@Test
 	public void getReservasAulaTest() {
 		Reservas reservas = insertarCuatro();
-		List<Reserva> reservasAula = reservas.getReservasAula(aula1);
+		List<Reserva> reservasAula = reservas.getReservasAulas(aula1);
 		assertEquals(reserva1, reservasAula.get(0));
 		assertEquals(reserva2, reservasAula.get(1));
 		assertEquals(2, reservasAula.size());
-		reservasAula = reservas.getReservasAula(aula3);
+		reservasAula = reservas.getReservasAulas(aula3);
 		assertEquals(0, reservasAula.size());
 	}
 	
@@ -355,5 +355,5 @@ public class ReservasTest {
 			assertEquals("ERROR: No se puede consultar la disponibilidad de una permanencia nula.", e.getMessage());
 		}
 	}
-*/
+
 }

@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.reservasaulas.MVC.vista;
+package org.iesalandalus.programacion.reservasaulas.mvc.vista;
 
 
 public enum Opcion {

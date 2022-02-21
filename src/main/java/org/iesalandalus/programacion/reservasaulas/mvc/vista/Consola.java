@@ -1,12 +1,12 @@
-package org.iesalandalus.programacion.reservasaulas.MVC.vista;
+package org.iesalandalus.programacion.reservasaulas.mvc.vista;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import org.iesalandalus.programacion.reservasaulas.MVC.modelo.dominio.Aula;
-import org.iesalandalus.programacion.reservasaulas.MVC.modelo.dominio.Profesor;
-import org.iesalandalus.programacion.reservasaulas.MVC.modelo.dominio.Tramo;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Tramo;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
 public class Consola {
