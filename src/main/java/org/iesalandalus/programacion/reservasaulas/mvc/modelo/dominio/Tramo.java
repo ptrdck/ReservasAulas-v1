@@ -11,8 +11,7 @@ public enum Tramo {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+		return mostrarCadena;
 	}
 	
 

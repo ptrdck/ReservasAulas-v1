@@ -43,24 +43,18 @@ public class Profesor {
 		}
 		this.nombre = formateaNombre(nombre);
 	}
-	private String formateaNombre(String nombre) {
-		// damos el formato inicial llevando todos los caracteres a minúsculas y reemplazando todos los espacios en blanco para que el nombre de salid esté todo junto
-		nombre = nombre.replace("\\s+", "").trim().toLowerCase();
-		String nombreLargo = "";
-		//iniciamos la variable de salida que se llamará nombreLargo
-		nombreLargo += nombre.substring(0, 1).toUpperCase();
-		
-		// ciclo for que recorre la cadena String
-		for (int i=0;i< nombre.length();i++ ) {
-			//condicion para que transforme a mayúscula el caracter siguiente en caso de que encuentre un espacio vacío
-			if (nombre.charAt(i-1) == ' '){
-				nombreLargo += nombre.substring(i, i+1).toUpperCase();
-			} else {
-				nombreLargo += nombre.substring(i, i+1);
+	private String formateaNombre(String nombreSinFormato) {
+		String nombre = nombreSinFormato.trim().replaceAll("\\s{2,}", " ").toLowerCase();
+		char cadenaChar[] = new char[nombre.length()];
+		cadenaChar=nombre.toCharArray();
+		for (int i = 0; i < cadenaChar.length; ++i) {
+			if (cadenaChar[i] == ' ') {
+				cadenaChar[i + 1] = Character.toUpperCase(cadenaChar[i + 1]);
 			}
 		}
-		nombre= nombreLargo.trim();
-		return nombreLargo;
+		cadenaChar[0] = Character.toUpperCase(cadenaChar[0]);
+		nombre = String.valueOf(cadenaChar);
+		return nombre;
 	}
 	//validación correo
 	public void setCorreo(String correo) {

@@ -53,7 +53,7 @@ public class Aula {
 
 	@Override
 	public String toString() {
-		return "Aula=" + getNombre();
+		return "nombre Aula=" + getNombre();
 	}
 
 

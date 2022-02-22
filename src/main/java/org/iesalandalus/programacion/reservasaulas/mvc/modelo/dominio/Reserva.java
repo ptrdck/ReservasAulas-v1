@@ -30,7 +30,7 @@ public class Reserva {
 	//validador profesor
 	private void setProfesor(Profesor profesor) {
 		if (profesor== null) {
-			throw new NullPointerException("ERROR: La reserva debe tener un nombre de profesor a cargo");
+			throw new NullPointerException("ERROR: La reserva debe estar a nombre de un profesor.");
 		}
 		this.profesor= profesor;
 		
@@ -42,7 +42,7 @@ public class Reserva {
 	//Validador aula
 	private void setAula(Aula aula) {
 		if (aula== null) {
-			throw new NullPointerException("ERROR: La reserva no puede ser para un aula nula.");
+			throw new NullPointerException("ERROR: La reserva debe ser para un aula concreta.");
 		}
 		this.aula= aula;
 	}
@@ -53,7 +53,7 @@ public class Reserva {
 	//validador permanencia
 	private void setPermanencia(Permanencia permanencia) {
 		if (permanencia== null) {
-			throw new NullPointerException("ERROR: La reserva debe tener una permanencia no nula.");
+			throw new NullPointerException("ERROR: La reserva se debe hacer para una permanencia concreta.");
 			
 		}
 		this.permanencia= permanencia;
@@ -64,7 +64,7 @@ public class Reserva {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(profesor, aula, permanencia);
+		return Objects.hash(aula, permanencia);
 	}
 
 	@Override
@@ -76,13 +76,12 @@ public class Reserva {
 		if (getClass() != obj.getClass())
 			return false;
 		Reserva other = (Reserva) obj;
-		return Objects.equals(aula, other.aula) && Objects.equals(permanencia, other.permanencia)
-				&& Objects.equals(profesor, other.profesor);
+		return Objects.equals(aula, other.aula) && Objects.equals(permanencia, other.permanencia);
 	}
 
 	@Override
 	public String toString() {
-		return "Reserva [profesor=" + getProfesor() + ", aula=" + getAula() + ", permanencia=" + getPermanencia() + "]";
+		return "Profesor=" + getProfesor() + ", aula=" + getAula() + ", permanencia=" + getPermanencia();
 	}
 	
 	

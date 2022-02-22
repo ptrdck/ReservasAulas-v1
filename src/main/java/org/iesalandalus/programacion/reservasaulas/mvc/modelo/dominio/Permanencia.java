@@ -34,7 +34,7 @@ public class Permanencia {
 
 	private void setDia(LocalDate dia) {
 		if (dia== null) {
-			throw new NullPointerException("ERROR: El día de permanencia no puede ser nulo.");
+			throw new NullPointerException("ERROR: El día de una permanencia no puede ser nulo.");
 			
 		}
 		
@@ -46,7 +46,7 @@ public class Permanencia {
 	
 	private void setTramo(Tramo tramo) {
 		if (tramo== null){
-			throw new NullPointerException("ERROR: El tramo de permanencia no puede ser nulo.");
+			throw new NullPointerException("ERROR: El tramo de una permanencia no puede ser nulo.");
 			
 		}
 		this.tramo= tramo;
@@ -74,7 +74,7 @@ public class Permanencia {
 
 	@Override
 	public String toString() {
-		return "Permanencia [dia=" + getDia().format(FORMATO_DIA) + ", tramo=" + getTramo() + "]";
+		return "dia=" + getDia().format(FORMATO_DIA) + ", tramo=" + getTramo() ;
 	}
 	
 
