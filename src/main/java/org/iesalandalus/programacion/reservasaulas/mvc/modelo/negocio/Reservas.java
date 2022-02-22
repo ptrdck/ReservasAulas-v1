@@ -85,6 +85,8 @@ public class Reservas {
 		Month mesHoy= LocalDate.now().getMonth();
 		if (mes.compareTo(mesHoy)>0) {
 			mesSiguiente=true;
+		} else {
+			mesSiguiente= false;
 		}
 		return mesSiguiente;
 		
